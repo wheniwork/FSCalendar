@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (readonly, nonatomic) NSArray<UILabel *> *weekdayLabels;
 
+@property (nonatomic) BOOL showSeparator;
+
 - (void)configureAppearance;
 
 @end

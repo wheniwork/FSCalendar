@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSPointerArray *weekdayPointers;
 @property (weak  , nonatomic) UIView *contentView;
 @property (weak  , nonatomic) FSCalendar *calendar;
+@property (strong, nonatomic) UIView *separatorView;
 
 - (void)commonInit;
 
@@ -54,6 +55,11 @@
         [self.contentView addSubview:weekdayLabel];
         [_weekdayPointers addPointer:(__bridge void * _Nullable)(weekdayLabel)];
     }
+
+    _separatorView = [[UIView alloc] initWithFrame:CGRectZero];
+    _separatorView.backgroundColor = [UIColor colorWithWhite:0.96 alpha:1.0];
+    [self.contentView addSubview:_separatorView];
+    _separatorView.hidden = YES;
 }
 
 - (void)layoutSubviews
@@ -76,7 +82,8 @@
         x += width;
     }];
     free(widths);
-    
+
+    self.separatorView.frame = CGRectMake(8, self.contentView.fs_bottom, self.contentView.fs_width - 16, 2);
 }
 
 #if TARGET_INTERFACE_BUILDER
@@ -90,6 +97,12 @@
 - (NSArray<UILabel *> *)weekdayLabels
 {
     return self.weekdayPointers.allObjects;
+}
+
+- (void)setShowSeparator:(BOOL)showSeparator
+{
+    _showSeparator = showSeparator;
+    self.separatorView.hidden = !showSeparator;
 }
 
 - (void)configureAppearance
