@@ -1006,6 +1006,8 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
         CGFloat padding = 5;
         if (!self.floatingMode) {
             _preferredRowHeight = (contentHeight-padding*2)/6.0;
+        if (!self.floatingMode && self.scope != FSCalendarScopeWeek) {
+            _preferredRowHeight = (contentHeight-padding)/6.0;
         } else {
             _preferredRowHeight = _rowHeight;
         }
