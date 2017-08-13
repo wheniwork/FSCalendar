@@ -1510,7 +1510,9 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     cell.calendar = self;
     NSDate *date = [self.calculator dateForIndexPath:indexPath];
     cell.image = [self.dataSourceProxy calendar:self imageForDate:date];
-    cell.numberOfEvents = [self.dataSourceProxy calendar:self numberOfEventsForDate:date];
+    if ([self.dataSourceProxy respondsToSelector:@selector(calendar:numberOfEventsForDate:)]) {
+        cell.numberOfEvents = [self.dataSourceProxy calendar:self numberOfEventsForDate:date];
+    }
     cell.titleLabel.text = [self.dataSourceProxy calendar:self titleForDate:date] ?: @([self.gregorian component:NSCalendarUnitDay fromDate:date]).stringValue;
     cell.subtitle  = [self.dataSourceProxy calendar:self subtitleForDate:date];
     cell.selected = [_selectedDates containsObject:date];

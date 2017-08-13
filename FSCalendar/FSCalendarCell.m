@@ -158,6 +158,7 @@
 - (void)prepareForReuse
 {
     [super prepareForReuse];
+    self.numberOfEvents = 0;
     if (self.window) { // Avoid interrupt of navigation transition somehow
         [CATransaction setDisableActions:YES]; // Avoid blink of shape layer.
     }
