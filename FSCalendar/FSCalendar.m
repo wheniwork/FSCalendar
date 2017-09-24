@@ -529,7 +529,7 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
         cell = (FSCalendarCell *)[collectionView cellForItemAtIndexPath:indexPath];
     } else {
         cell = [self cellForDate:selectedDate atMonthPosition:FSCalendarMonthPositionCurrent];
-        NSIndexPath *indexPath = [collectionView indexPathForCell:cell];
+        NSIndexPath *indexPath = cell ? [collectionView indexPathForCell:cell] : nil;
         if (indexPath) {
             [collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
         }
@@ -823,7 +823,7 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
 - (nullable FSCalendarCell *)cellForDate:(NSDate *)date atMonthPosition:(FSCalendarMonthPosition)position
 {
     NSIndexPath *indexPath = [self.calculator indexPathForDate:date atMonthPosition:position];
-    return (FSCalendarCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return indexPath ? (FSCalendarCell *)[self.collectionView cellForItemAtIndexPath:indexPath] : nil;
 }
 
 - (NSDate *)dateForCell:(FSCalendarCell *)cell
@@ -1638,7 +1638,7 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     _preferredWeekdayHeight = FSCalendarAutomaticDimension;
     _preferredRowHeight     = FSCalendarAutomaticDimension;
     
-    [self.calendarHeaderView setNeedsAdjustingViewFrame:YES];
+    [_calendarHeaderView setNeedsAdjustingViewFrame:YES];
     [self setNeedsLayout];
     
 }

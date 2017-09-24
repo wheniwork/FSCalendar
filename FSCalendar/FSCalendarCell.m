@@ -361,7 +361,7 @@ OFFSET_PROPERTY(preferredEventOffset, PreferredEventOffset, _appearance.eventOff
 
 - (void)setSubtitle:(NSString *)subtitle
 {
-    if (![_subtitle isEqualToString:subtitle]) {
+    if (![_subtitle isEqual:subtitle]) {
         BOOL diff = (subtitle.length && !_subtitle.length) || (_subtitle.length && !subtitle.length);
         _subtitle = subtitle;
         if (diff) {

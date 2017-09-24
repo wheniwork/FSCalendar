@@ -62,7 +62,7 @@
 {
     NSString *selectorString = NSStringFromSelector(selector);
     selectorString = self.deprecations[selectorString];
-    return NSSelectorFromString(selectorString);
+    return selectorString ? NSSelectorFromString(selectorString) : selector;
 }
 
 @end
