@@ -536,7 +536,9 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     }
     if (![_selectedDates containsObject:selectedDate]) {
         cell.selected = YES;
-        [cell performSelecting];
+        if ([cell isKindOfClass:[FSCalendarCell class]]) {
+            [cell performSelecting];
+        }
     }
     [self enqueueSelectedDate:selectedDate];
     [self.delegateProxy calendar:self didSelectDate:selectedDate atMonthPosition:monthPosition];
@@ -1210,8 +1212,12 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
             [self deselectDate:self.selectedDate];
         }
         [_collectionView selectItemAtIndexPath:targetIndexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
-        FSCalendarCell *cell = (FSCalendarCell *)[_collectionView cellForItemAtIndexPath:targetIndexPath];
-        [cell performSelecting];
+        UICollectionViewCell *cvCell = [_collectionView cellForItemAtIndexPath:targetIndexPath];
+        if ([cvCell isKindOfClass:[FSCalendarCell class]])
+        {
+            FSCalendarCell *cell = (FSCalendarCell *)cvCell;
+            [cell performSelecting];
+        }
         [self enqueueSelectedDate:targetDate];
         [self selectCounterpartDate:targetDate];
         
