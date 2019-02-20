@@ -828,6 +828,16 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     return indexPath ? (FSCalendarCell *)[self.collectionView cellForItemAtIndexPath:indexPath] : nil;
 }
 
+- (nullable NSIndexPath *)indexPathForDate:(NSDate *)date atMonthPosition:(FSCalendarMonthPosition)position
+{
+  return [self.calculator indexPathForDate:date atMonthPosition:position];
+}
+
+- (nullable FSCalendarCell *)cellForIndexPath:(NSIndexPath *)indexPath
+{
+  return (FSCalendarCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+}
+
 - (NSDate *)dateForCell:(FSCalendarCell *)cell
 {
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];

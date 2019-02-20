@@ -513,6 +513,22 @@ IB_DESIGNABLE
  */
 - (nullable FSCalendarCell *)cellForDate:(NSDate *)date atMonthPosition:(FSCalendarMonthPosition)position;
 
+/**
+ Returns the index path for the specified date.
+
+ @param date The date of the index path
+ @param position The month position for the index path
+ @return The index path of the cell of the calendar, or nil if the index path is out of range.
+ */
+- (nullable NSIndexPath *)indexPathForDate:(NSDate *)date atMonthPosition:(FSCalendarMonthPosition)position;
+
+/**
+ Returns the calendar cell for the specified index path.
+
+ @param indexPath The index path of the cell
+ @return An object representing a cell of the calendar, or nil if the cell is not visible or index path is out of range.
+ */
+- (nullable FSCalendarCell *)cellForIndexPath:(NSIndexPath *)indexPath;
 
 /**
  Returns the date of the specified cell.
