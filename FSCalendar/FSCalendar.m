@@ -850,6 +850,28 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     return [self.calculator monthPositionForIndexPath:indexPath];
 }
 
+- (NSArray<__kindof FSCalendarCell *> *)cellsForDate:(NSDate *)date atMonthPosition:(FSCalendarMonthPosition)position
+{
+  NSMutableArray *result = [NSMutableArray new];
+  NSIndexPath *indexPath = [self indexPathForDate:date atMonthPosition:position];
+
+  if (indexPath != nil)
+  {
+    NSInteger numberOfItems = [self.collectionView numberOfItemsInSection:indexPath.section];
+    for (NSInteger row = 0; row < numberOfItems; row++)
+    {
+      UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:row
+                                                                                                  inSection:indexPath.section]];
+      if ([cell isKindOfClass:[FSCalendarCell class]])
+      {
+        [result addObject:cell];
+      }
+    }
+  }
+
+  return result;
+}
+
 - (NSArray<FSCalendarCell *> *)visibleCells
 {
     return [self.collectionView.visibleCells filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id  _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {

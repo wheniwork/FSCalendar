@@ -546,6 +546,14 @@ IB_DESIGNABLE
  */
 - (FSCalendarMonthPosition)monthPositionForCell:(FSCalendarCell *)cell;
 
+/**
+ Returns an array of calendar cells for a section.
+
+ @param date The date of the section (week or month)
+ @param position The month position for the section
+ @return An array of FSCalendarCell objects.
+ */
+- (NSArray<__kindof FSCalendarCell *> *)cellsForDate:(NSDate *)date atMonthPosition:(FSCalendarMonthPosition)position;
 
 /**
  Returns an array of visible cells currently displayed by the calendar.
