@@ -788,7 +788,7 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
   NSMutableArray *result = [NSMutableArray new];
   NSIndexPath *indexPath = [self indexPathForDate:date atMonthPosition:position];
 
-  if (indexPath != nil)
+  if (indexPath != nil && indexPath.section < [self.collectionView numberOfSections])
   {
     NSInteger numberOfItems = [self.collectionView numberOfItemsInSection:indexPath.section];
     for (NSInteger row = 0; row < numberOfItems; row++)
